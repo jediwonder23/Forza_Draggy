@@ -3,15 +3,16 @@ terraform {
     aws = { source = "hashicorp/aws", version = "~> 5.0" }
   }
   backend "s3" {
-    bucket = var.tf_state_bucket
-    key    = "terraform/forza-backend.tfstate"
-    region = var.aws_region
-    encrypt = true
+    bucket         = "forza-backend"
+    key            = "terraform/state.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    kms_key_id     = "arn:aws:kms:us-east-1:599801163540:key/d116cc92-3ea4-4e07-8913-590c1bc3f1df"  # Optional
   }
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
 }
 
 resource "aws_cognito_user_pool" "forza" {
@@ -88,7 +89,7 @@ resource "aws_iam_role_policy_attachment" "lambda_dynamo_attach" {
 
 resource "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir  = "${path.module}/lambda"
+  source_dir  = "${path.module}/Lambda"
   output_path = "${path.module}/lambda.zip"
 }
 
