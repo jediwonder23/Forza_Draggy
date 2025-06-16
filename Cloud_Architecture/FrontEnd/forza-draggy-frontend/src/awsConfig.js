@@ -1,10 +1,18 @@
-export const awsConfig = {
-  Auth: {
-    region: 'us-east-1',
-    userPoolId: 'us-east-1_1djlwTSjT',
-    userPoolWebClientId: '3ftntoeeatpi6i1ka9cc4sok3q',
-    authenticationFlowType: 'USER_PASSWORD_AUTH',
+const accessKeyId = import.meta.env.VITE_AWS_ACCESS_KEY_ID;
+const secretAccessKey = import.meta.env.VITE_AWS_SECRET_ACCESS_KEY;
+const region = 'us-east-1';
+const bucketName = 'forza-bucket-1'; // Move this here for cleaner separation
+
+if (!accessKeyId || !secretAccessKey) {
+  console.warn("AWS credentials are missing from environment variables!");
+}
+
+export default {
+  region,
+  bucketName,
+  credentials: {
+    accessKeyId,
+    secretAccessKey,
   },
 };
 
-export const apiEndpoint = 'https://6fuc1t276e.execute-api.us-east-1.amazonaws.com';
