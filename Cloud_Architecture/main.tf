@@ -7,7 +7,7 @@ terraform {
     key            = "terraform/state.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    kms_key_id     = "arn:aws:kms:us-east-1:599801163540:key/d116cc92-3ea4-4e07-8913-590c1bc3f1df"  # Optional
+    kms_key_id     = "arn:aws:kms:us-east-1:599801163540:key/d116cc92-3ea4-4e07-8913-590c1bc3f1df"  
   }
 }
 
